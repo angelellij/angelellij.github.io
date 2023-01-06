@@ -79,7 +79,7 @@ html table{
     border-spacing: 3px;
 }
 
-td{ padding:20px; background-color: var(--gray); color:var(--black); text-align: center;}
+html td{ background-color: var(--gray); color:var(--black); text-align: center;font-size: var(--font-small);}
 td.word-team-1{ background-color: var(--blue);color: var(--white);}
 td.word-team-2{ background-color:var(--red);color: var(--white);}
 td.word-team--1{ background-color: var(--black); color: var(--white);}
