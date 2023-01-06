@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Cashier Simulator </title>
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link href="https://fonts.googleapis.com/css2?family=Caveat+Brush&display=swap" rel="stylesheet">
+        <meta name="viewport", content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+        <link rel="stylesheet" href="basic.css">
+        <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+        <script type='module' src="game.js'"> </script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    </head>
+    <body>
+        <main>
+            <div id='game' class='container' >
+                <h1 class="center"> Cashier Simulator </h1>
+                <div id="reader" width="600px"></div>
+                <div id='team-names' class='row'> 
+                    <div class="col s6 center"><h2 class="blue">Blue</h2></div>
+                    <div class="col s6 center"><h2 class="red">Red</h2></div>
+                </div>
+                <div class='row'> 
+                    <div class="col s6 center"><input id="blue-score" class='score blue' type='number' value="0"></div>
+                    <div class="col s6 center"><input id="red-score"  class='score red' type='number' value="0"></div>
+                </div>
+                <div class="row">
+                    <table id="gameboard" class="col s12">
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+                <button id="new-round-btn"> New Round </button>
+            </div>
+
+        </main>
+    </body>
+
+    
+</html>

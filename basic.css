@@ -1,0 +1,97 @@
+/* Variables */
+html{
+    --green: #7eb154;
+    --white: #ffffff;
+    --red: #F44336 ;
+    --blue: #2196F3;
+    --gray: #fafafa;
+    --black: black;
+
+    --font-beast: 6rem;
+    --font-gigantic: 4rem;
+    --font-enourmous: 2.9rem;
+    --font-biggest: 2.5rem;
+    --font-bigger: 2rem;
+    --font-big: 1.3rem;
+    --font-normal: 2rem;
+    --font-small: 0.9rem;
+    --font-smaller: 0.8rem;
+
+}
+
+/*Body*/
+html body{ 
+    margin:0; 
+    background-color: #7eb154;
+    font-size: var(--font-normal);
+    font-weight: normal;
+    font-family: 'Caveat Brush', cursive;
+    color:var(--white);
+    overflow-x: hidden;
+    padding-bottom: 5rem;
+}
+
+.hide{ display:none; }
+
+.error{
+    color:var(--danger);
+    text-align: center;
+}
+
+h1, h2, h3, h4, h5, h6, p, a, input, button{
+    font-family: inherit;
+}
+
+html label { 
+    font-size: var(--font-normal);
+    color:var(--white);
+}
+
+input{
+    color:var(--white);
+}
+
+::placeholder, /* Chrome, Firefox, Opera, Safari 10.1+ */
+:-ms-input-placeholder, /* Internet Explorer 10-11 */
+::-ms-input-placeholder  /* Microsoft Edge */ { 
+color: var(--gray);
+opacity: 1; /* Firefox */
+}
+
+
+button{
+    width: 100%;
+    padding: var(--padding1);
+    background-color: transparent;
+    color: var(--white);
+    border: 0;
+    cursor: pointer;
+    font-weight: 900;
+}
+
+button:hover, button:focus{
+    opacity: 0.8;
+    background-color: transparent !important;
+}
+
+html table{
+    border-collapse: initial;
+    border-spacing: 3px;
+}
+
+td{ padding:20px; background-color: var(--gray); color:var(--black); text-align: center;}
+td.word-team-1{ background-color: var(--blue);color: var(--white);}
+td.word-team-2{ background-color:var(--red);color: var(--white);}
+td.word-team--1{ background-color: var(--black); color: var(--white);}
+.selected{ opacity: 0.5;}
+.score{
+    margin-top:0;
+    text-align: center;
+    font-weight: bold;
+    font-size: var(--font-enourmous)!important;
+    padding-top: 15px !important;
+    padding-bottom: 15px !important;
+}
+#team-names, #team-names div, #team-names h2{ margin-bottom:0}
+
+
