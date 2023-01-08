@@ -1,6 +1,7 @@
 /* Variables */
 html{
     --green: #7eb154;
+    --green2:#639937;
     --white: #ffffff;
     --red: #F44336 ;
     --blue: #2196F3;
@@ -94,4 +95,22 @@ td.word-team--1{ background-color: var(--black); color: var(--white);}
 }
 #team-names, #team-names div, #team-names h2{ margin-bottom:0}
 
+html .btn{
+    border: var(--white) 4px solid;
+    padding: 10px 45px;
+    border-radius: 22px;
+    color: var(--white);
+    background-color: transparent;
+    font-size: var(--font-normal);
+    height: auto;
+}
+
+html .btn:hover{
+    background-color: var(--green2);
+}
+
+html .btn.full{
+    margin: auto;
+    display: block;
+}
 

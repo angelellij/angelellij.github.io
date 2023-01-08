@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title> Cashier Simulator </title>
+        <title> Codenames </title>
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link href="https://fonts.googleapis.com/css2?family=Caveat+Brush&display=swap" rel="stylesheet">
@@ -13,127 +13,35 @@
     <body>
         <main>
             <div id='game' class='container' >
-                <h1 class="center"> Cashier Simulator </h1>
-                <div id="reader" width="600px"></div>
-                <div id='team-names' class='row'> 
-                    <div class="col s6 center"><h2 class="blue">Blue</h2></div>
-                    <div class="col s6 center"><h2 class="red">Red</h2></div>
+                <h1 class="center"> Codenames </h1>
+                <a id='new-game' href="game.html" class="btn full"> New game </a>
+                <br>
+                <a href="game.html" class="btn full"> Continue </a>
+                <br>
+                <a href="instructions.html" class="btn full"> Instructions </a>
+                <br>
+                <div class="row">
+                    <div class="col s6"><a href="Words.pdf" class="btn full" target="_blank"> Words </a></div>
+                    <div class="col s6"><a href="Palabras.pdf" class="btn full" target="_blank"> Palabras </a></div>
                 </div>
-                <div class='row'> 
-                    <div class="col s6 center"><input id="blue-score" class='score blue' type='number' value="0"></div>
-                    <div class="col s6 center"><input id="red-score"  class='score red' type='number' value="0"></div>
-                </div>
-                <div class="row" style="overflow-x: scroll;">
-                    <table id="gameboard" class="col s12">
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </table>
-                </div>
-                <button id="new-round-btn"> New Round </button>
+                
+                <br>
+                <a href="qr.py" class="btn full"> Create your words </a>
+                <br>
+                <a href="https://ko-fi.com/guatagames" class="btn full"> Buy me a coffe </a>
             </div>
 
         </main>
     </body>
+
     <script type='module'> 
-        var words = []
-        const QR = document.getElementById('reader');
-        const GAME = document.getElementById('game');
-        const GAMEBOARD = document.getElementById('gameboard');
-        const WORDSEL = GAMEBOARD.getElementsByTagName('td');
-        const html5QrCode = new Html5Qrcode("reader");
-        const config = { fps: 10, qrbox: { width: 250, height: 250 } };
-        
-        const qrCodeSuccessCallback = (word, decodedResult) => {
-            if( words.some( obj => { return obj.word == word } ) ) return
-            words.push({'word':word, 'team':0})
-            console.log(words.length, word, words);
-            WORDSEL[words.length-1].innerText = word
-        
-            if (words.length == 25) start_round()
+        document.getElementById('new-game').onclick = function(e){
+            e.preventDefault();
+            localStorage.clear();
+            location.href = 'game.html'
         }
-        
-        function new_round(){
-            words = []
-            QR.classList.remove('hide');
-            html5QrCode.start({ facingMode: "environment" }, config, qrCodeSuccessCallback);
-            for(let i = 0; i < WORDSEL.length; i++){
-                WORDSEL[i].innerText = '';
-                WORDSEL[i].classList.remove('word-team-1')
-                WORDSEL[i].classList.remove('word-team-2')
-                WORDSEL[i].classList.remove('word-team--1')
-                WORDSEL[i].classList.remove('selected')
-                
-            }
-        }
-        
-        function start_round(){
-            html5QrCode.stop()
-            QR.classList.add('hide');
-            GAME.classList.remove('hide');
-            console.log(words)
-            select_words_for_team(8, 1)
-            select_words_for_team(8, 2)
-            select_words_for_team(1, -1)
-            return
-        }
-        
-        function select_words_for_team(n, team){
-            let count = 0;
-            while (count < n){
-                let i = Math.floor(Math.random() * 24)
-                if (words[i]['team'] === 0){
-                    words[i]['team'] = team
-                    WORDSEL[i].classList.add('word-team-'+team)
-                    count += 1
-                } 
-            }
-            return words
-        }
-        
-        document.getElementById('new-round-btn').onclick = function(){ new_round(); }
-        
-        for( let i = 0; i < WORDSEL.length; i++){
-            WORDSEL[i].addEventListener('click', function(){
-                if( this.classList.contains('selected')) this.classList.remove('selected');
-                else this.classList.add('selected');
-            })
-        }
-        
-        new_round();
     </script>
+
 
     
 </html>
