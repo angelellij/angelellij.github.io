@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Codenames </title>
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link href="https://fonts.googleapis.com/css2?family=Caveat+Brush&display=swap" rel="stylesheet">
+        <meta name="viewport", content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+        <link rel="stylesheet" href="basic.css">
+        <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    </head>
+    <body>
+        <style> 
+            input.ipt[type=text], 
+            input.ipt[type=text]:hover, 
+            input[type=text].ipt:not(.browser-default):focus:not([readonly])[type=text]:focus, 
+            input.ipt[type=text]:active{ 
+                border-bottom:4px white solid;
+                font-family: inherit;
+                font-size: inherit;
+            }
+
+        </style>
+        <main>
+            <div id='game' class='container' >
+                <h1 class="center"> Codenames </h1>
+                <img id="qrcode" class="hide"></img>
+                <img id='frame' class="hide" src="Frame.png" style="height:50px; width:50px;"> 
+                <p> No special characters like á, é, í, ó, ú, ä, ë, ï, ö, ü</p>
+                <div class="row">
+                    <div class="col s4"><input type="text" class='word-inputs ipt' data-row="1" data-col="1" placeholder="Chocolate"></div>
+                    <div class="col s4"><input type="text" class='word-inputs ipt' data-row="1" data-col="2" placeholder="Agenda"></div>
+                    <div class="col s4"><input type="text" class='word-inputs ipt' data-row="1" data-col="3" placeholder="Actor"></div>
+                </div>
+                <div class="row">
+                    <div class="col s4"><input type="text" class='word-inputs ipt' data-row="2" data-col="1" placeholder="Alcohol"></div>
+                    <div class="col s4"><input type="text" class='word-inputs ipt' data-row="2" data-col="2" placeholder="Bar"></div>
+                    <div class="col s4"><input type="text" class='word-inputs ipt' data-row="2" data-col="3" placeholder="Cable"></div>
+                </div>
+                <div class="row">
+                    <div class="col s4"><input type="text" class='word-inputs ipt' data-row="3" data-col="1" placeholder="Capital"></div>
+                    <div class="col s4"><input type="text" class='word-inputs ipt' data-row="3" data-col="2" placeholder="Civil"></div>
+                    <div class="col s4"><input type="text" class='word-inputs ipt' data-row="3" data-col="3" placeholder="Explosion"></div>
+                </div>
+                <div class="row">
+                    <div class="col s4"><input type="text" class='word-inputs ipt' data-row="4" data-col="1" placeholder="Gas"></div>
+                    <div class="col s4"><input type="text" class='word-inputs ipt' data-row="4" data-col="2" placeholder="Hotel"></div>
+                    <div class="col s4"><input type="text" class='word-inputs ipt' data-row="4" data-col="3" placeholder="Liberal"></div>
+                </div>
+                <button id="download" class="btn" style="margin-bottom:20px;"> Download Page </button>
+                <div>
+                    <canvas id="page" width="2780" height="3620" style="width:100%;"> </canvas>
+                </div>
+
+            </div>
+        </main>
+    </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+
+    <script type='module'> 
+        // new QRious({element: document.getElementById("qrcode"), value: "https://webisora.com")};
+
+        var maxRows = 4;
+        var maxCols = 3;
+
+        const py_margin = 120
+        const px_margin = 120
+        const py_space = 850
+        const px_space = 850
+
+        const canvas = document.getElementById("page");
+        const ctx = canvas.getContext("2d");
+        const qr = document.getElementById("qrcode");
+        const frame = document.getElementById("frame");
+        const ipts = document.getElementsByClassName("word-inputs");
+
+        //Build the page
+        ctx.globalCompositeOperation = 'source-over'
+        ctx.fillStyle = "white";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.font = "96px Caveat Brush";
+        ctx.textAlign = "left";
+
+        for(let i = 0; i < ipts.length; i++){
+            console.log('loop')
+            ipts[i].addEventListener('input', function(){
+                let row = this.dataset.row-1
+                let col = this.dataset.col-1
+                let word = this.value
+
+                createQr(word)
+                setTimeout(function(){
+                    console.log(word)
+                    addWord(word, row, col );
+                }, 1000)
+            });
+        }
+
+        document.getElementById('download').onclick = download
+
+        function download(){
+            var link = document.createElement('a');
+            link.download = 'words.png';
+            link.href = canvas.toDataURL()
+            link.click();
+            link.remove();
+        }
+
+        function createQr(word){
+            var qrcode = new QRious({
+                element: document.getElementById("qrcode"),
+                background: '#ffffff',
+                foreground: '#000000',
+                padding: 200,
+                size: 820,
+                value: word
+            });
+        }
+
+        function addWord(word, row, col){
+            let startX = col*px_space + px_margin
+            let startY = row*py_space + py_margin
+
+
+            // Add qr
+            ctx.fillStyle = "#000000";
+            ctx.drawImage(qr, startX, startY,);
+            ctx.drawImage(frame, startX, startY, 820, 820 * frame.height / frame.width)
+            ctx.save();
+
+            let wordX = startX + 80
+            let wordY = startY + 630
+
+            // Add text
+            ctx.fillText(word, wordX + px_margin, wordY + py_margin);
+
+            ctx.rotate(-Math.PI/2);
+            ctx.fillText(word, -row*px_space - 860 + px_margin, col*px_space + 750 + py_margin);
+
+            ctx.rotate(-Math.PI/2);
+            ctx.fillText(word, -col*py_space -860 + py_margin,  -row*px_space -310 + px_margin);
+
+            ctx.rotate(-Math.PI/2);
+            ctx.fillText(word, row*px_space + 200 + px_margin, -col*py_space -310 + py_margin);
+
+            ctx.restore();
+        }
+
+
+    </script>
+
+
+    
+</html>
