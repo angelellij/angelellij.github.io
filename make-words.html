@@ -27,7 +27,12 @@
             <div id='game' class='container' >
                 <h1 class="center"> Codenames </h1>
                 <img id="qrcode" class="hide"></img>
-                <img id='frame' class="hide" src="Frame.png" style="height:50px; width:50px;"> 
+                <p> Upload your SQUARE frame (png, webp or svg).</p>
+                <div class="row">
+                    <div  class="col s3"><img id='frame' src="Frame.png" style="width:100%;" accept=".png,.webp,.svg"> </div>
+                    <div class="col s9"><input id="frame-input" type="file"></div>
+                </div>
+
                 <p> No special characters like á, é, í, ó, ú, ä, ë, ï, ö, ü</p>
                 <div class="row">
                     <div class="col s4"><input type="text" class='word-inputs ipt' data-row="1" data-col="1" placeholder="Chocolate"></div>
@@ -60,11 +65,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
 
     <script type='module'> 
-        // new QRious({element: document.getElementById("qrcode"), value: "https://webisora.com")};
-
-        var maxRows = 4;
-        var maxCols = 3;
-
+        const maxRows = 4;
+        const maxCols = 3;
         const py_margin = 120
         const px_margin = 120
         const py_space = 850
@@ -74,6 +76,7 @@
         const ctx = canvas.getContext("2d");
         const qr = document.getElementById("qrcode");
         const frame = document.getElementById("frame");
+        const frameInput = document.getElementById("frame-input");
         const ipts = document.getElementsByClassName("word-inputs");
 
         //Build the page
@@ -84,7 +87,6 @@
         ctx.textAlign = "left";
 
         for(let i = 0; i < ipts.length; i++){
-            console.log('loop')
             ipts[i].addEventListener('input', function(){
                 let row = this.dataset.row-1
                 let col = this.dataset.col-1
@@ -98,9 +100,25 @@
             });
         }
 
-        document.getElementById('download').onclick = download
+        console.log(frameInput)
 
-        function download(){
+        frameInput.onchange = function(evt){
+            console.log('alo')
+            var tgt = evt.target || window.event.srcElement,
+                files = tgt.files;
+            
+            if (FileReader && files && files.length) {
+                var fr = new FileReader();
+                fr.onload = function () {
+                    frame.src = fr.result;
+                }
+                fr.readAsDataURL(files[0]);
+            } else{
+                console.log('Not supported')
+            }
+        };
+
+        document.getElementById('download').onclick = function(){
             var link = document.createElement('a');
             link.download = 'words.png';
             link.href = canvas.toDataURL()
@@ -122,7 +140,6 @@
         function addWord(word, row, col){
             let startX = col*px_space + px_margin
             let startY = row*py_space + py_margin
-
 
             // Add qr
             ctx.fillStyle = "#000000";
