@@ -114,3 +114,19 @@ html .btn.full{
     display: block;
 }
 
+
+#languages{
+    position: fixed;
+    right:2rem;
+    top:1rem;
+}
+#languages img{
+    height:2.5rem;
+}
+html:not([lang='en']) .en{
+    display: none;
+}
+html:not([lang='es']) .es{
+    display: none;
+}
+

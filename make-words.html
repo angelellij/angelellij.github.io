@@ -9,7 +9,11 @@
         <link rel="stylesheet" href="basic.css">
         <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-
+        <script type='module'> 
+            var lang = new URL(window.location).searchParams.get("lang")
+            if (lang == undefined) lang = 'en'
+            document.getElementsByTagName('html')[0].lang = lang
+        </script>
     </head>
     <body>
         <style> 
@@ -25,15 +29,24 @@
         </style>
         <main>
             <div id='game' class='container' >
-                <h1 class="center"> Codenames </h1>
+                <h1 class="center" language=""> 
+                    <span class="en">Create your words</span>
+                    <span class="es">Crea tus palabras</span> 
+                </h1>
                 <img id="qrcode" class="hide"></img>
-                <p> Upload your SQUARE frame (png, webp or svg).</p>
+                <p> 
+                    <span class="en">Upload your SQUARE frame (png, webp or svg).</span>
+                    <span class="en">Subir un marco CUADRADO (png, webp or svg).</span>
+                </p>
                 <div class="row">
                     <div  class="col s3"><img id='frame' src="Frame.png" style="width:100%;" accept=".png,.webp,.svg"> </div>
                     <div class="col s9"><input id="frame-input" type="file"></div>
                 </div>
 
-                <p> No special characters like á, é, í, ó, ú, ä, ë, ï, ö, ü</p>
+                <p> 
+                    <span class="en">No special characters like á, é, í, ó, ú, ä, ë, ï, ö, ü</span>
+                    <span class="en">No se aceptan caracteres espaciales como á, é, í, ó, ú, ä, ë, ï, ö, ü</span>
+                    </p>
                 <div class="row">
                     <div class="col s4"><input type="text" class='word-inputs ipt' data-row="1" data-col="1" placeholder="Chocolate"></div>
                     <div class="col s4"><input type="text" class='word-inputs ipt' data-row="1" data-col="2" placeholder="Agenda"></div>
@@ -54,7 +67,10 @@
                     <div class="col s4"><input type="text" class='word-inputs ipt' data-row="4" data-col="2" placeholder="Hotel"></div>
                     <div class="col s4"><input type="text" class='word-inputs ipt' data-row="4" data-col="3" placeholder="Liberal"></div>
                 </div>
-                <button id="download" class="btn" style="margin-bottom:20px;"> Download Page </button>
+                <button id="download" class="btn" style="margin-bottom:20px;"> 
+                    <span class="en">Download page</span>
+                    <span class="es">Descargar página</span> 
+                </button>
                 <div>
                     <canvas id="page" width="2780" height="3620" style="width:100%;"> </canvas>
                 </div>

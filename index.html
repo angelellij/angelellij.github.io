@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <title> Codenames </title>
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -9,38 +9,59 @@
         <link rel="stylesheet" href="basic.css">
         <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <script type='module'> 
+            var lang = new URL(window.location).searchParams.get("lang")
+            if (lang == undefined) lang = 'en'
+            document.getElementsByTagName('html')[0].lang = lang
+        </script>
     </head>
     <body>
         <main>
-            <div id='game' class='container' >
-                <h1 class="center"> Codenames </h1>
-                <a id='new-game' href="game.html" class="btn full"> New game </a>
-                <br>
-                <a href="game.html" class="btn full"> Continue </a>
-                <br>
-                <a href="instructions.html" class="btn full"> Instructions </a>
-                <br>
-                <div class="row">
-                    <div class="col s6"><a href="Words.pdf" class="btn full" target="_blank"> Words </a></div>
-                    <div class="col s6"><a href="Palabras.pdf" class="btn full" target="_blank"> Palabras </a></div>
-                </div>
-                
-                <br>
-                <a href="make-words.html" class="btn full"> Create your words </a>
-                <br>
-                <a href="https://ko-fi.com/guatagames" class="btn full"> Buy me a coffe </a>
+            <div id="languages">
+                <a href="index.html?lang=en"> <img src="en.png" alt="english"></a><a href="index.html?lang=es"> <img src="es.png" alt="español"></a> </a>
             </div>
+            <div id='game' class='container' >
+                <h1 class="center" language=""> 
+                    <span class="en">Codenames</span>
+                    <span class="es">Codigo secreto</span> 
+                </h1>
 
+                <a href="game.html" class="btn full en" onclick="deleteLocalStorage()"> New game </a>
+                <a href="game.html?lang=es" class="btn full es" onclick="deleteLocalStorage()"> Nuevo juego </a>
+                <br>
+
+                <a href="game.html" class="btn full en"> Continue </a>
+                <a href="game.html?lang=es" class="btn full es"> Continuar</a> 
+                <br>
+
+                <a href="instructions.html" class="btn full en"> Instructions </a>
+                <a href="instructions.html?lang=es" class="btn full es"> Instrucciones </a>
+                <br>
+
+                <a href="Words.pdf" class="btn full en" target="_blank"> Words </a>
+                <a href="Palabras.pdf" class="btn full es" target="_blank"> Palabras </a>
+                <br>
+
+                <a href="make-words.html" class="btn full en"> Create your words </a>
+                <a href="make-words.html?lang=es" class="btn full es"> Crea tus palabras </a>
+                <br>
+
+                <a href="https://ko-fi.com/guatagames" class="btn full"> 
+                    <span class="en">Buy me a coffe  </span>
+                    <span class="es">Un cafesito</span> 
+                </a>
+            </div>
+            <script>
+                var deleteLocalStorage = function(e){
+                    e.preventDefault();
+                    localStorage.clear();
+                    location.href = this.href
+                }
+            </script>
         </main>
     </body>
 
-    <script type='module'> 
-        document.getElementById('new-game').onclick = function(e){
-            e.preventDefault();
-            localStorage.clear();
-            location.href = 'game.html'
-        }
-    </script>
+
 
 
     

@@ -9,55 +9,115 @@
         <link rel="stylesheet" href="basic.css">
         <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <script type='module'> 
+            var lang = new URL(window.location).searchParams.get("lang")
+            if (lang == undefined) lang = 'en'
+            document.getElementsByTagName('html')[0].lang = lang
+        </script>
     </head>
     <body>
         <main>
             <div id='game' class='container' >
-                <h1 class="center"> Codenames </h1>
+                <h1 class="center"> <span class='en'>Instructions</span> <span class='es'>Instrucciones</span> </h1>
 
-                <h2> Players </h2>
-                    <p> The game requires at least 4 players, which will be divided in two teams.</p>
-                    <p> For each round the team will have one captain, while the rest of the members will be crewmates.</p>
+                <h2> <span class='en'>Players</span> <span class='es'>Jugadores</span> </h2>
+                    <span class='en'>
+                        <p> The game requires at least 4 players, which will be divided in 2 teams.</p>
+                        <p> For each round the team will have one captain, while the rest of the members will be crewmates.</p>
+                    </span> 
+                    <span class='es'>                    
+                        <p> El juego requiere de al menos 4 jugadores, los cuales se dividirán en 2 equipos. </p>
+                        <p> Para cada ronda se escogerá un capitán, y el resto serán tripulantes. </p>
+                    </span>
 
-                <h2> Board</h2>
-                    <p style="margin-bottom: 0;">The board has 25 words. From those: </p>
-                    <div class="row">
-                        <div class="col s1"></div>
-                        <ul class="col s11" style="margin-top: 10px;">
-                            <li> 8 correspond to the <span class="blue">&nbsp;blue&nbsp;</span> team. </li>
-                            <li> 8 correspond to the <span class="red">&nbsp;red&nbsp;</span> team. </li>
-                            <li> 1 is a <span class="black">&nbsp;blacklist&nbsp;</span> word</li>
-                            <li> 8 are neutral words </li>
-                        </ul>
-                    </div>
+
+                <h2> <span class='en'>Board</span> <span class='es'>Tablero</span> </h2>
+                    <span class='en'>
+                        <p style="margin-bottom: 0;">The board has 25 words. From those: </p>
+                        <div class="row">
+                            <div class="col s1"></div>
+                            <ul class="col s11" style="margin-top: 10px;">
+                                <li> 8 correspond to the <span class="blue">&nbsp;blue&nbsp;</span> team. </li>
+                                <li> 8 correspond to the <span class="red">&nbsp;red&nbsp;</span> team. </li>
+                                <li> 1 is a <span class="black">&nbsp;blacklist&nbsp;</span> word</li>
+                                <li> 8 are neutral. </li>
+                            </ul>
+                        </div>
+                    </span> 
+                    <span class='es'>
+                        <p style="margin-bottom: 0;">El tablero tiene 25 palabras, de las cuales... </p>
+                        <div class="row">
+                            <div class="col s1"></div>
+                            <ul class="col s11" style="margin-top: 10px;">
+                                <li> 8 corresponden al equipo <span class="blue">&nbsp;azul.&nbsp;</span> </li>
+                                <li> 8 corresponden al equipo <span class="red">&nbsp;rojo.&nbsp;</span> </li>
+                                <li> 1 está <span class="black">&nbsp;prohibida.&nbsp;</span></li>
+                                <li> 8 son neutrales. </li>
+                            </ul>
+                        </div>
+                    </span>
+
                     <p style="margin-bottom: 0;">
-                        There are 2 boards. 
+                        <span class="en">There are 2 boards. </span><span class="es">Hay dos tableros... </span>
                         <ul>
-                            <li> Cremate's board: Is the paper one, placed on the table, visible to the whole team. </li>
-                            <img src="crewmate-board.jpg" width="100%">
-                            <li> Captains's board: Is the one on this web, and shows which words belong to which team. Only the captains will use this board. </li>
-                            <img src="captains-board.png" width="100%">
+                            <span class="en">
+                                <li> Cremate's board: Is the paper one, placed on the table, visible to all the players. </li>
+                                <img src="crewmate-board.jpg" width="100%">
+                                <li> Captains's board: Is the one on this web, and shows which words belong to which team. Only the captains will use this board. </li>
+                                <img src="captains-board.png" width="100%">
+                            </span>
+                            <span class="es">
+                                <li> Tablero del tripulante: Es el que está impreso, puesto sobre la mesa, visible para todos los jugadores. </li>
+                                <img src="crewmate-board.jpg" width="100%">
+                                <li> Tablero del capitan: Es el que está en esta app, y que muestra que palabras corresponden a cada equipo. Solo los capitanes pueden ver este tablero. </li>
+                                <img src="capitan.png" width="100%">
+                            </span>
                         </ul>
                     </p>
 
-                <h2> Objective </h2>
-                    <p> The objective for each team is to guess all of the words that belong to their corresponding color. </p>
-                    <p> When a team gueses all their words, the other team will add 1 point for every word they did not guess. </p>
-                    <p> If a team gueses the black word, they will add 1 point for every word they did not guess, while the other team doesn't add any points. </p>
-                    <p> The less points a team has, the better. </p>
+                    <h2> <span class='en'>Objective</span> <span class='es'>Objetivo</span> </h2>
+                    <span class='en'>
+                        <p> The objective for each team is to guess all of the words that belong to their corresponding color. </p>
+                        <p> When a team gueses all their words, the other team will add 1 point for every word they did not guess. </p>
+                        <p> If a team says the black word, they will add 1 point for every word they did not guess, while the other team doesn't add any points. </p>
+                        <p> The less points a team has, the better. </p>
+                    </span> 
+                    <span class='es'>
+                        <p> El objetivo para cada equipo es adivinar todas las palabras que corresponden a su color. </p>
+                        <p> Cuando un equipo adivina todas sus palabras, el otro debera añadirse 1 punto por cada palabra que no lograron a adivinar. </p>
+                        <p> Si un equipo dice la palabra prohibida se termina la ronda y solo ellos se añaden 1 punto por cada palabra que no lograron adivinar. </p>
+                        <p> Cuantos menos puntos tiene un equipo, mejor. </p>
+                    </span>
 
-                <h2> Gameplay </h2>
-                    <p>Each time a new board is generated, a new captain is elected for each team.</p>
-                    <p> The captain is in charge of picking a word that helps the team guess the most amount of words of their color, 
-                        while trying to avoid their team saying words that belong any words that don't belong to their color. 
-                        Besides saying a word, he needs to say the amount of words he believe can be associated with that word. </p>
-                    <p> For example, in the above word, the captain could say <span style="text-decoration:underline"> "Countries 2" </span></p>
-                    <p> 
-                        The crewmates can guess the amount of words their captain indicates (in this case 2). 
-                        If the crewmates pick a word that doesn't belong to their team, the color of the word is counted as "guessed", no matter the color, and their turn is over. 
-                        If they guessed the black word, the whole round is over and the score should be calculated.
-                        A captain can say "Countries infinite", if he wants his team to guess as many amount of words as they can.
-                    </p>
+                    <h2> <span class='en'>Gameplay</span> <span class='es'>El juego</span> </h2>
+                    <span class='en'>
+                        <p> Each time a new board is generated, a new captain is elected for each team.</p>
+                        <p> The captain is in charge of picking a word that helps the team guess the most amount of words of their color, 
+                            while trying to avoid their team saying words that belong any words that don't belong to their color. 
+                            Besides saying a word, he needs to say the amount of words he believe can be associated with that word. </p>
+                        <p> For example, in the board above, the captain could say <span style="text-decoration:underline"> "Countries 2" </span></p>
+                        <p> 
+                            The crewmates can guess the amount of words their captain indicates (in this case 2). 
+                            If the crewmates pick a word that doesn't belong to their team, the color of the word is counted as "guessed", no matter the color, and their turn is over. 
+                            If they guessed the black word, the whole round is over and the score should be calculated.
+                            A captain can say "Countries infinite", if he wants his team to guess as many amount of words as they can.
+                        </p>
+                    </span> 
+                    <span class='es'>
+                        <p> Cada vez que se genera un nuevo tablero se eligirá un nuevo capitan. </p>
+                        <p> 
+                            El capitán está a cargo de elegir una palabra que ayde a su equipo a adivinar la mayor cantidad de palabras de su color,
+                            pero evitando que sus tripulantes elijan una palabra que corresponde al color enemigo o negro.
+                            Además de decir 1 palabra, deberá decir la cantidad de palabras del tablero que se asocian con ella.
+                        </p>
+                        <p> Por ejemplo, en el tablero que se muestra arriba un capitán podría decir <span style="text-decoration:underline"> "Países 2" </span></p>
+                        <p> 
+                            Los tripulantes solo pueden adivinar tantas palabras como indica el capitán (en este caso 2).
+                            Si los tripulantes eligen una palabra que no  pertenese a su color, se termina el turno, no importa que color y se marcan todas las palabras adivinadas.
+                            Si los tripulantes eligen la palabra prohibida se acaba la ronda, se cuentan los puntos y se pasa a un nuevo tablero.
+                            Un capitán puede decir "Infinito" en vez de un número, si quisiera dejar que su equipo adiviné todas las palabras que quieran.
+                        </p>
+                    </span>
         </main>
     </body>
 
