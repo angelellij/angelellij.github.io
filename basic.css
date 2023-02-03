@@ -18,6 +18,16 @@ html{
     --font-small: 0.9rem;
     --font-smaller: 0.8rem;
 
+    --hourglass-sand:#fc6;
+    --hourglass-bg:#def;
+    --hourglass-br: #630;
+
+    --hourglass-border:0.5rem;
+    --hourglass-width:5rem;
+    --hourglass-main:7rem;
+    --hourglass-time:60s;
+    --hourglass-flip:0.75s;
+
 }
 
 /*Body*/
@@ -51,6 +61,8 @@ html label {
 input{
     color:var(--white);
 }
+
+audio {display: none;}
 
 ::placeholder, /* Chrome, Firefox, Opera, Safari 10.1+ */
 :-ms-input-placeholder, /* Internet Explorer 10-11 */
@@ -93,7 +105,18 @@ td.word-team--1{ background-color: var(--black); color: var(--white);}
     padding-top: 15px !important;
     padding-bottom: 15px !important;
 }
-#team-names, #team-names div, #team-names h2{ margin-bottom:0}
+#team-names, #team-names h2{ margin:0; }
+
+#team-names{
+    display: grid;
+    gap: 0rem;
+    grid-template-areas: 
+        'a x c'
+        'd x f';
+    grid-template-rows: repeat(2, 50%);
+    grid-template-columns: 40% 20% 40%;
+    margin-block: 1rem;
+}
 
 html .btn{
     border: var(--white) 4px solid;
@@ -130,3 +153,181 @@ html:not([lang='es']) .es{
     display: none;
 }
 
+
+/* Hourglass */
+  
+  .hourglass {
+    position: relative;
+    display: grid;
+    align-items: center;
+  }
+  
+  .hourglass input {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 2;
+    cursor: pointer;
+    pointer-events: all !important;
+    opacity: 0;
+  }
+  
+  .hourglass > div {
+    position: relative;
+    height: 100%;
+    width: 75%;
+    margin: auto;
+    padding: 0 var(--hourglass-border);
+    border-block: solid var(--hourglass-border) var(--hourglass-br);
+  }
+  
+  .hourglass > div div {
+    position: relative;
+    height: 50%;
+    background-color: var(--hourglass-bg);
+    box-shadow: 0 0 1vmin 1vmin #bcd inset;
+    overflow: hidden;
+  }
+  
+  .hourglass > div div:nth-child(2) {
+    transform: rotate(180deg);
+  }
+  
+  .hourglass > div div:nth-child(1),
+  .hourglass > div div:nth-child(2) {
+    border-radius: 0 0 50% 50%;
+  }
+  
+  /* Sand */
+  .hourglass > div div:nth-child(1):before,
+  .hourglass > div div:nth-child(2):before,
+  .hourglass > div div:nth-child(1):after,
+  .hourglass > div div:nth-child(2):after {
+      content: "";
+      position: absolute;
+      height: 100%;
+      background-color: var(--hourglass-sand);
+  }
+  
+  .hourglass > div div:nth-child(1):before,
+  .hourglass > div div:nth-child(2):before {
+    width: 100%;
+    border-radius: 50%;
+    left:0;
+    transform: translateY(-100%);
+  }
+  
+  .hourglass > div div:nth-child(2):before {
+    transform: translateY(-50%);
+  }
+  
+  /* Animations */
+  
+  .hourglass input:nth-child(1):not(:checked) + input + div div:nth-child(1):before,
+  .hourglass input:nth-child(1):not(:checked) + input + div div:nth-child(1):after,
+  .hourglass input:nth-child(1):not(:checked) + input + div div:nth-child(2):before,
+  .hourglass input:nth-child(1):not(:checked) + input + div div:nth-child(2):after {
+      animation-name: None;
+  }
+  
+  .hourglass input:nth-child(1){
+      z-index: 3;
+  }
+  .hourglass input:nth-child(1):checked{
+      pointer-events: none !important;
+      z-index: -1;
+  }
+  
+  .hourglass > div div:nth-child(1):before,
+  .hourglass > div div:nth-child(1):after,
+  .hourglass > div div:nth-child(2):before,
+  .hourglass > div div:nth-child(2):after {
+    animation-name: none;
+    animation-duration: var(--hourglass-time);
+    animation-iteration-count: 1;
+    animation-fill-mode: both;
+    animation-timing-function: linear;
+    animation-delay: var(--hourglass-flip);
+  }
+  
+  /* Flip */
+  
+  .hourglass input:nth-child(1):not(:checked) + input + div{
+      transform: rotate(0) !important;
+      transition-duration: 0s;
+  }
+  
+  .hourglass input:nth-child(2):not(:checked) + div {
+      transition-duration: var(--hourglass-flip);
+      transform: rotate(180deg);
+  }
+  
+  .hourglass input:nth-child(2):checked + div {
+      transition-duration: var(--hourglass-flip);
+      transform: rotate(0deg);
+  }
+  
+  /* Sand */
+  
+  .hourglass input:nth-child(2):checked + div div:nth-child(1):before,
+  .hourglass input:nth-child(2):not(:checked) + div div:nth-child(2):before {
+    animation-name: hourglass-sand-drop;
+  }
+  
+  .hourglass input:nth-child(2):not(:checked) + div div:nth-child(1):before,
+  .hourglass input:nth-child(2):checked + div div:nth-child(2):before {
+    animation-name: hourglass-sand-accumulate;
+  }
+  
+  /* Drip */
+  
+  .hourglass input:nth-child(2):checked + div div:nth-child(1):after,
+  .hourglass input:nth-child(2):not(:checked) + div div:nth-child(2):after {
+    opacity: 0;
+  }
+  
+  .hourglass input:nth-child(2):not(:checked) + div div:nth-child(1):after,
+  .hourglass input:nth-child(2):checked + div div:nth-child(2):after {
+    animation-name: hourglass-drip;
+  }
+  
+  @keyframes hourglass-sand-drop {
+      0% {
+          transform: translateY(-50%);
+      }
+      1% {
+          transform: translateY(50%);
+      }
+      100% {
+          transform: translateY(100%);
+      }
+  }
+  @keyframes hourglass-sand-accumulate {
+    0%,
+    2% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateY(-50%);
+    }
+  }
+  
+  @keyframes hourglass-drip {
+    0% {
+      transform: translateY(120%);
+    }
+    1% {
+      transform: translateY(120%);
+    }
+    2% {
+      left: 45%;
+      bottom: 0;
+      transform: translateY(0%);
+      width: 10%;
+    }
+    100% {
+      left: 50%;
+      transform: translateY(0);
+      width: 0;
+    }
+  }

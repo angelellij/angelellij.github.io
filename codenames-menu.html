@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title> Codenames </title>
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link href="https://fonts.googleapis.com/css2?family=Caveat+Brush&display=swap" rel="stylesheet">
+        <meta name="viewport", content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+        <link rel="stylesheet" href="basic.css">
+        <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <script type='module'> 
+            var lang = new URL(window.location).searchParams.get("lang")
+            if (lang == undefined) lang = 'en'
+            document.getElementsByTagName('html')[0].lang = lang
+        </script>
+    </head>
+    <body>
+        <main>
+            <div id="languages">
+                <a href="index.html?lang=en"> <img src="en.png" alt="english"></a><a href="index.html?lang=es"> <img src="es.png" alt="español"></a> </a>
+            </div>
+            <div id='game' class='container' >
+                <h1 class="center" language=""> 
+                    <span class="en">Codenames</span>
+                    <span class="es">Codigo secreto</span> 
+                </h1>
+
+                <a href="codenames-game.html" class="btn full en"> Play </a>
+                <a href="codenames-game.html?lang=es" class="btn full es"> Jugar</a> 
+                <br>
+
+                <a href="instructions.html" class="btn full en"> Instructions </a>
+                <a href="instructions.html?lang=es" class="btn full es"> Instrucciones </a>
+                <br>
+
+                <a href="Words.pdf" class="btn full en" target="_blank"> Words </a>
+                <a href="Palabras.pdf" class="btn full es" target="_blank"> Palabras </a>
+                <br>
+
+                <a href="make-words.html" class="btn full en"> Create your words </a>
+                <a href="make-words.html?lang=es" class="btn full es"> Crea tus palabras </a>
+                <br>
+
+            </div>
+        </main>
+    </body>
+
+
+
+
+    
+</html>
