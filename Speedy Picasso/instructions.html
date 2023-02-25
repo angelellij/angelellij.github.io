@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Speedy Picasso </title>
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link href="https://fonts.googleapis.com/css2?family=Caveat+Brush&display=swap" rel="stylesheet">
+        <meta name="viewport", content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+        <link rel="stylesheet" href="../basic.css">
+        <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <script type='module'> 
+            var lang = new URL(window.location).searchParams.get("lang")
+            if (lang == undefined) lang = 'en'
+            document.getElementsByTagName('html')[0].lang = lang
+        </script>
+    </head>
+    <body>
+        <main>
+            <div id='game' class='container' >
+                <h1 class="center"> <span class='en'>Instructions</span> <span class='es'>Instrucciones</span> </h1>
+
+                <h2> <span class='en'>Players</span> <span class='es'>Jugadores</span> </h2>
+                    <span class='en'>
+                        <p> The game requires at least 4 players, which will be divided in 2 teams.</p>
+                        <p> For each round the team will have one captain, while the rest of the members will be crewmates.</p>
+                    </span> 
+                    <span class='es'>                    
+                        <p> El juego requiere de al menos 4 jugadores, los cuales se dividirán en 2 equipos. </p>
+                        <p> Para cada ronda se escogerá un capitán, y el resto serán tripulantes. </p>
+                    </span>
+
+                    <h2> <span class='en'>Gameplay</span> <span class='es'>El juego</span> </h2>
+                    <span class='en'>
+                        <p> Each round a new set of cards should be drawn and new captain's elected. </p>
+                        <p> One of the captain is in charge of picking one card from the 3 set of cards, for them to draw. Both captains will need to know the words and the
+                            values of each word (shown on the left 1, 2, 3). </p>
+                        <p> The captains will have to draw in a piece of paper the words, trying to make their team guess the word before the other team. When a word is guessed
+                            they get the points assigned to that word. </p>
+                        <p> There is no need to draw the words in order. A captain can decide to draw the 3 pointer words first. </p>
+                        <p> Once all three words are guessed, point are summed and registered, and the round is ended. </p>
+                    </span> 
+                    <span class='es'>
+                        <p> Cada ronda se elige un nuevo set de cartas y un nuevo capitán. </p>
+                        <p> Uno de los capitanes deberá elegir una de las 3 cartas que contienen las palabras a dibujar. Ambos capitanes deberán ver las cartas y conocer sus
+                            palabras y puntuaciones (estas se muestran a la izquierda de las palabras siendo 1, 2 o 3) </p>
+                        <p> Los capitanes deberan dibujar en papel las palabras, intentando hacer que su equipo adivine las palabras antes que el otro equipo. Si una palabra los 
+                            puntos se asignaran al equipo correspondiente y esa palabra ya no puede ser adivinada por el otro equipo. </p>
+                        <p> No es necesario dibujar las palabras en orden. Si el capitan quisiese, podria empezar dibujando, por ejemplo, por la de 3 puntos. </p>
+                        <p> Una vez que las 3 palabras se adivinan, la ronda se termina ylos puntos se suman y registran.</p>
+                    </span>
+                    
+        </main>
+    </body>
+
+
+    <script type='module'> 
+        
+    </script>
+
+    
+</html>

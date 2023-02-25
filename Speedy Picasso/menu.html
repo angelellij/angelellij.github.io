@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title> Speedy Picasso </title>
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link href="https://fonts.googleapis.com/css2?family=Caveat+Brush&display=swap" rel="stylesheet">
+        <meta name="viewport", content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+        <link rel="stylesheet" href="../basic.css">
+        <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <script type='module'> 
+            var lang = new URL(window.location).searchParams.get("lang")
+            if (lang == undefined) lang = 'en'
+            document.getElementsByTagName('html')[0].lang = lang
+        </script>
+    </head>
+    <body>
+        <main>
+            <div id='game' class='container' >
+                <h1 class="center" language=""> 
+                    Speedy Picasso
+                </h1>
+
+                <a href="game.html" class="btn full en"> Play </a>
+                <a href="game.html?lang=es" class="btn full es"> Jugar</a> 
+                <br>
+
+                <a href="instructions.html" class="btn full en"> Instructions </a>
+                <a href="instructions.html?lang=es" class="btn full es"> Instrucciones </a>
+                <br>
+
+            </div>
+        </main>
+    </body>
+
+
+
+
+    
+</html>

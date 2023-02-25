@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title> Sleuth and Strike </title>
+        <meta charset="UTF-8">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link href="https://fonts.googleapis.com/css2?family=Caveat+Brush&display=swap" rel="stylesheet">
+        <meta name="viewport", content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+        <link rel="stylesheet" href="../basic.css">
+        <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <script type='module'> 
+            var lang = new URL(window.location).searchParams.get("lang")
+            if (lang == undefined) lang = 'en'
+            document.getElementsByTagName('html')[0].lang = lang
+        </script>
+        <style>
+            html{
+                --black:#333333;
+                --pink:#FF20A6;
+                --purple:#2819DC;
+                --lblue:#00C2FF;
+                --dgreen:#38852C;
+                --brown:#BE6D3F;
+            }
+
+            .checkbox.mblack div{ border-color: var(--black);}
+            .checkbox.mblack [type="checkbox"]:checked + div{ background-color: var(--black); }
+
+            .checkbox.mpink div{ border-color: var(--pink);}
+            .checkbox.mpink [type="checkbox"]:checked + div{ background-color: var(--pink); }
+
+            .checkbox.mpurple div{ border-color: var(--purple);}
+            .checkbox.mpurple [type="checkbox"]:checked + div{ background-color: var(--purple); }
+
+            .checkbox.mlblue div{ border-color: var(--lblue);}
+            .checkbox.mlblue [type="checkbox"]:checked + div{ background-color: var(--lblue); }
+
+            .checkbox.mdgreen div{ border-color: var(--dgreen);}
+            .checkbox.mdgreen [type="checkbox"]:checked + div{ background-color: var(--dgreen); }
+
+            .checkbox.mbrown div{ border-color: var(--brown);}
+            .checkbox.mbrown [type="checkbox"]:checked + div{ background-color: var(--brown); }
+
+            body [type="checkbox"]:not(:checked), body [type="checkbox"]:checked{
+                position: relative;
+                height: 100%;
+                width: 100%;
+                pointer-events: all;
+                cursor: pointer;
+            }
+            .checkbox{ position: relative;} 
+            .checkbox div{
+                position: absolute;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                border:3px solid;
+                pointer-events: none;
+            }
+
+            .list-cards{
+                display:grid; 
+                grid-template-columns: 
+                repeat(3,1fr);
+                gap: 3%;
+                min-height:300px;
+            }
+            .container-checkboxes{
+                padding: 10px;
+                margin-left:50%;
+                display:grid; 
+                grid-template-columns: repeat(2,1fr);
+                gap: 3%;
+                height: 100%;
+            }
+            .card{ background-color: white;}
+            .card > img {   
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                max-height: 100%;
+                object-fit: contain;
+                object-position: left;
+            }
+        </style>
+    </head>
+    <body>
+        <main>
+            <div id='game' class='container' >
+                    <div id="armas">
+                        <h3> Armas </h3>
+                        <div class="list-cards">
+                            <div class="card">
+                                <img src="Veneno.png" > 
+                                <div class="container-checkboxes">
+                                    <div class="checkbox mblack"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mpink"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mpurple"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mlblue"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mdgreen"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mbrown"><input type="checkbox"><div></div></div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <img src="Garrafa.png" > 
+                                <div class="container-checkboxes">
+                                    <div class="checkbox mblack"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mpink"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mpurple"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mlblue"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mdgreen"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mbrown"><input type="checkbox"><div></div></div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <img src="Cuchillo.png" > 
+                                <div class="container-checkboxes">
+                                    <div class="checkbox mblack"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mpink"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mpurple"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mlblue"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mdgreen"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mbrown"><input type="checkbox"><div></div></div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <img src="Pistola.png" > 
+                                <div class="container-checkboxes">
+                                    <div class="checkbox mblack"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mpink"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mpurple"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mlblue"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mdgreen"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mbrown"><input type="checkbox"><div></div></div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <img src="Garrote.png" > 
+                                <div class="container-checkboxes">
+                                    <div class="checkbox mblack"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mpink"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mpurple"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mlblue"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mdgreen"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mbrown"><input type="checkbox"><div></div></div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <img src="Soga.png" > 
+                                <div class="container-checkboxes">
+                                    <div class="checkbox mblack"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mpink"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mpurple"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mlblue"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mdgreen"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mbrown"><input type="checkbox"><div></div></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div>
+                        <h3> Víctimas </h3>
+                        <div class="list-cards">
+                            <div class="card">
+                                <img src="Medusa.png" > 
+                                <div class="container-checkboxes">
+                                    <div class="checkbox mblack"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mpink"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mpurple"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mlblue"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mdgreen"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mbrown"><input type="checkbox"><div></div></div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <img src="Javier.png" > 
+                                <div class="container-checkboxes">
+                                    <div class="checkbox mblack"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mpink"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mpurple"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mlblue"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mdgreen"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mbrown"><input type="checkbox"><div></div></div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <img src="Dr. Reformulemelo.png" > 
+                                <div class="container-checkboxes">
+                                    <div class="checkbox mblack"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mpink"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mpurple"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mlblue"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mdgreen"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mbrown"><input type="checkbox"><div></div></div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <img src="AnimaDino.png" > 
+                                <div class="container-checkboxes">
+                                    <div class="checkbox mblack"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mpink"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mpurple"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mlblue"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mdgreen"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mbrown"><input type="checkbox"><div></div></div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <img src="Sr. Bigotes.png" > 
+                                <div class="container-checkboxes">
+                                    <div class="checkbox mblack"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mpink"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mpurple"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mlblue"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mdgreen"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mbrown"><input type="checkbox"><div></div></div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <img src="Srta. Capa.png" > 
+                                <div class="container-checkboxes">
+                                    <div class="checkbox mblack"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mpink"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mpurple"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mlblue"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mdgreen"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mbrown"><input type="checkbox"><div></div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3> Lugares </h3>
+                        <div class="list-cards">
+                            <div class="card">
+                                <img src="Bano.png" > 
+                                <div class="container-checkboxes">
+                                    <div class="checkbox mblack"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mpink"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mpurple"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mlblue"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mdgreen"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mbrown"><input type="checkbox"><div></div></div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <img src="Dormitorio.png" > 
+                                <div class="container-checkboxes">
+                                    <div class="checkbox mblack"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mpink"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mpurple"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mlblue"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mdgreen"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mbrown"><input type="checkbox"><div></div></div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <img src="Estudio.png" > 
+                                <div class="container-checkboxes">
+                                    <div class="checkbox mblack"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mpink"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mpurple"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mlblue"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mdgreen"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mbrown"><input type="checkbox"><div></div></div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <img src="Estar.png" > 
+                                <div class="container-checkboxes">
+                                    <div class="checkbox mblack"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mpink"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mpurple"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mlblue"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mdgreen"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mbrown"><input type="checkbox"><div></div></div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <img src="Comedor.png" > 
+                                <div class="container-checkboxes">
+                                    <div class="checkbox mblack"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mpink"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mpurple"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mlblue"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mdgreen"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mbrown"><input type="checkbox"><div></div></div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <img src="Cocina.png" > 
+                                <div class="container-checkboxes">
+                                    <div class="checkbox mblack"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mpink"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mpurple"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mlblue"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mdgreen"><input type="checkbox"><div></div></div>
+                                    <div class="checkbox mbrown"><input type="checkbox"><div></div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </main>
+    </body>
+
+    <script type='module'> 
+       
+    </script>
+
+    
+</html>
