@@ -8,15 +8,17 @@ html{
     --gray: #fafafa;
     --black: black;
 
-    --font-beast: 6rem;
-    --font-gigantic: 4rem;
-    --font-enourmous: 2.9rem;
-    --font-biggest: 2.5rem;
-    --font-bigger: 2rem;
-    --font-big: 1.3rem;
-    --font-normal: 2rem;
-    --font-small: 0.9rem;
-    --font-smaller: 0.8rem;
+    --fm:1;
+    
+    --font-beast: Calc( var(--fm) * 6rem);
+    --font-gigantic: Calc( var(--fm) * 4rem);
+    --font-enourmous: Calc( var(--fm) * 2.9rem);
+    --font-biggest: Calc( var(--fm) * 2.5rem);
+    --font-bigger: Calc( var(--fm) * 2rem);
+    --font-big: Calc( var(--fm) * 1.3rem);
+    --font-normal: Calc( var(--fm) * 2rem);
+    --font-small: Calc( var(--fm) * 0.9rem);
+    --font-smaller: Calc( var(--fm) * 0.8rem);
 
     --hourglass-sand:#fc6;
     --hourglass-bg:#def;
@@ -96,9 +98,13 @@ html td{ background-color: var(--gray); color:var(--black); text-align: center;f
 html:not(#virtual-board) td.word-team-1{ background-color: var(--blue);color: var(--white);}
 html:not(#virtual-board) td.word-team-2{ background-color:var(--red);color: var(--white);}
 html:not(#virtual-board) td.word-team--1{ background-color: var(--black); color: var(--white);}
+
 html#virtual-board td.selected.word-team-1{ background-color: var(--blue);color: var(--white);}
 html#virtual-board td.selected.word-team-2{ background-color:var(--red);color: var(--white);}
 html#virtual-board td.selected.word-team--1{ background-color: var(--black); color: var(--white);}
+html#virtual-board td.selected:not(.word-team--1):not(.word-team-1):not(.word-team-3) {
+  background-color: lightgray;color:var(--black);
+}
 html:not(#virtual-board) .selected{ opacity: 0.5;}
 .score{
     margin-top:0;

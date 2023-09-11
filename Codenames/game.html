@@ -100,7 +100,8 @@
         function qrCodeSuccessCallback(word, decodedResult) {
             try {
             const jsonObject = JSON.parse(word);
-            words = jsonObject
+            words = jsonObject;
+            makeBoard();
             } catch (error) {
                 if( words.some( obj => { return obj.word == word } ) ) {
                     scanErrorAudio.play();
@@ -109,9 +110,9 @@
                 scanAudio.play();
                 words.push({'word':word, 'team':0, 'selected':false})
                 console.log(words.length, word, words);
-                WORDSEL[words.length-1].innerText = word
+                WORDSEL[words.length-1].innerText = word;
+                if (words.length == 25) start_round()
             }
-            if (words.length == 25) start_round()
             localStorage.setItem( 'cd-words', JSON.stringify(words) )
         }
         
@@ -191,13 +192,16 @@
         words = localStorage.getItem('cd-words')
         if (words === undefined || words === null) words = [];
         else words = JSON.parse(words)
+        makeBoard();
+        if (words.length == 25) start_round()
+        html5QrCode.start({ facingMode: "environment" }, config, qrCodeSuccessCallback)
+    function makeBoard(){
         for (let i = 0; i < words.length; i++){
             WORDSEL[i].innerText = words[i].word
             if (words[i].team != 0) WORDSEL[i].classList.add('word-team-'+words[i].team)
             if (words[i].selected ) WORDSEL[i].classList.add('selected')
         }
-        if (words.length == 25) start_round()
-        html5QrCode.start({ facingMode: "environment" }, config, qrCodeSuccessCallback)
+    }
     </script>
 
     
