@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="virtual-board">
     <head>
         <title> Codenames </title>
         <meta charset="UTF-8">
@@ -8,7 +8,8 @@
         <link href="https://fonts.googleapis.com/css2?family=Caveat+Brush&display=swap" rel="stylesheet">
         <meta name="viewport", content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
         <link rel="stylesheet" href="../basic.css">
-        <script src="https://unpkg.com/html5-qrcode@2.3.4/html5-qrcode.min.js" type="text/javascript"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+        <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
         <script type='module'> 
             var lang = new URL(window.location).searchParams.get("lang")
@@ -30,6 +31,7 @@
                     <input id="blue-score" class='score blue' style="grid-area:d;" type='number' value="0">
                     <input id="red-score" class='score red' style="grid-area:f;"  type='number' value="0">
                 </div>
+                <img id="qrcode" alt="QR Code will be displayed here">
                 <div class="row" style="overflow-x: scroll;">
                     <table id="gameboard" class="col s12">
                         <tr>
@@ -71,9 +73,6 @@
                 </div>
                 <button id="new-round-btn" class="btn"> <span class="en">New Round</span><span class="es">Nueva ronda</span></button>
             </div>
-            <audio id='scan-audio' src="scan.mp3"></audio>
-            <audio id='scan-error-audio' src="scan_error.mp3"></audio>
-            <audio id='timer-audio' src="../timer_end.mp3"></audio>
         </main>
     </body>
 
@@ -84,41 +83,41 @@
             timerAudio.play();
         });
     </script>
+    
     <script> 
+        const DECK = [
+            'Remera', 'Chocolate', 'Pasto', 'Armadura', 'Titanic', 'Dinosaurio', 'Submarino',
+'Puerta', 'Auto', 'Laguna', 'Mago', 'Bebe', 'Alemania', 'Escondidas', 'Manzana', 'Zanahoria', 'Guitarra', 'Pileta', 'Inodoro', 
+'Fantasia', 'Agujero', 'Trinchera', 'Cuchillo', 'Paracaidas', 'Astronauta', 'Rio', 'Boca', 'Carrera', 'Independencia',
+'Chico', 'Tirolesa', 'Espia', 'Cruz', 'Vaca', 'Campo', 'Parlante',  'Estadio', 'Boliche', 'Obelisco', 'Suiza', 'Peru', 'Bolivia',
+'Australia', 'Cocodrilo', 'Leon', 'Canguro', 'Refugio', 'Tiburon', 'Pez', 'Oso', 'Perro', 'Gato', 'Gallina', 'Plata', 'Oro', 'Bosta', 'Academia',
+'Argentina', 'China', 'Rusia', 'Caballo', 'Oveja', 'Abeja', 'Insecto', 'Pajaro', 'Roble', 'Rosa', 'Jazmin', 'Violeta', 'Tomate', 'Carne', 'Pera', 'Ciruela', 'Trigo', 'Pan',
+'Taco', 'Ciruela', 'Cruz', 'Linea', 'Triangulo', 'Profesor', 'Programador', 'Psicologo', 'Medico', 'Musico', 'Presidente', 'Moto', 'Tren', 'Bondi', 'Administrador', 
+'Patineta', 'Bici', 'Cafe', 'Colombia', 'Sudafrica', 'Calor', 'Frio', 'Nieve', 'Sol',  'Luna', 'Mercurio', 'Hielo', 'Coca', 'Fernet', 'Cerveza', 'Cigarrillo', 'Hoja', 'Madera',
+'Piedra', 'Pantalla', 'Control', 'Remoto', 'Analisis', 'Ciencia', 'Microscopio', 'Matematica', 'Lengua']
         var words = []
-        const QR = document.getElementById('reader');
+        const IMG = document.getElementById("qrcode");
         const GAME = document.getElementById('game');
         const GAMEBOARD = document.getElementById('gameboard');
         const WORDSEL = GAMEBOARD.getElementsByTagName('td');
-        const html5QrCode = new Html5Qrcode("reader");
-        const config = { fps: 10, qrbox: { width: 250, height: 250 } };
-
-        const scanAudio = document.getElementById('scan-audio');
-        const scanErrorAudio = document.getElementById('scan-error-audio');
-
-
-        function qrCodeSuccessCallback(word, decodedResult) {
-            try {
-            const jsonObject = JSON.parse(word);
-            words = jsonObject
-            } catch (error) {
-                if( words.some( obj => { return obj.word == word } ) ) {
-                    scanErrorAudio.play();
-                    return;
-                }
-                scanAudio.play();
-                words.push({'word':word, 'team':0, 'selected':false})
-                console.log(words.length, word, words);
-                WORDSEL[words.length-1].innerText = word
+                
+        function getRandomStrings(array, count) {
+            if (count > array.length) {
+                throw new Error("Count exceeds the length of the array.");
             }
-            if (words.length == 25) start_round()
-            localStorage.setItem( 'cd-words', JSON.stringify(words) )
+
+            const randomWords = [];
+
+            while (randomWords.length < count) {
+                const randomIndex = Math.floor(Math.random() * array.length);
+                const word = array[randomIndex];
+                randomWords.push({ word, team: 0, selected: false });
+            }
+
+            return randomWords;
         }
-        
+
         function new_round(){
-            words = []
-            QR.classList.remove('hide');
-            html5QrCode.start({ facingMode: "environment" }, config, qrCodeSuccessCallback);
             for(let i = 0; i < WORDSEL.length; i++){
                 WORDSEL[i].innerText = '';
                 WORDSEL[i].classList.remove('word-team-1')
@@ -126,17 +125,16 @@
                 WORDSEL[i].classList.remove('word-team--1')
                 WORDSEL[i].classList.remove('selected')
             }
+            start_round();
+            writeWords();
+            createQr(words);
             localStorage.setItem( 'cd-words', JSON.stringify(words) )
         }
         
         function start_round(){
-            html5QrCode.stop().then((ignore) => {
-            // QR Code scanning is stopped.
-            }).catch((err) => {
-            // Stop failed, handle it.
-            });
-            QR.classList.add('hide');
             GAME.classList.remove('hide');
+            words = getRandomStrings(DECK, 25);
+            console.log(words)
             select_words_for_team(8, 1)
             select_words_for_team(8, 2)
             select_words_for_team(1, -1)
@@ -168,9 +166,9 @@
         }
         
         for( let i = 0; i < WORDSEL.length; i++){
+            console.log(i)
             WORDSEL[i].addEventListener('click', function(){
                 let word = WORDSEL[i].innerText 
-                console.log(word)
                 if (word == '') return
                 if( this.classList.contains('selected')){
                     this.classList.remove('selected');
@@ -190,14 +188,31 @@
         if(blueScore) document.getElementById("blue-score").value = blueScore
         words = localStorage.getItem('cd-words')
         if (words === undefined || words === null) words = [];
-        else words = JSON.parse(words)
-        for (let i = 0; i < words.length; i++){
+        else {
+            words = JSON.parse(words)
+            writeWords();
+            createQr(words)
+        }
+
+        function writeWords(){
+            for (let i = 0; i < words.length; i++){
             WORDSEL[i].innerText = words[i].word
             if (words[i].team != 0) WORDSEL[i].classList.add('word-team-'+words[i].team)
             if (words[i].selected ) WORDSEL[i].classList.add('selected')
         }
-        if (words.length == 25) start_round()
-        html5QrCode.start({ facingMode: "environment" }, config, qrCodeSuccessCallback)
+        }
+        
+        
+        function createQr(board){
+            var qrcode = new QRious({
+                element: IMG,
+                background: '#ffffff',
+                foreground: '#000000',
+                padding: 50,
+                size: 820,
+                value: JSON.stringify(board)
+            });
+        }
     </script>
 
     
