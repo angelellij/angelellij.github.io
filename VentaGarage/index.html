@@ -32,84 +32,84 @@
         {
             "t":"Papeles en el viento",
             "d":"Escrito por Eduardo Sacheri.",
-            "p":"4.000"
+            "p":"10.000"
            },
         {
             "t":"La pregunta de sus ojos",
-            "p":"4.000",
+            "p":"7.000",
             "d":"Escrito por Eduardo Sacheri. En este se basó la película.",
             "i":"0 -61px"
         },
         {
             "t":"Crónicas de Narnia",
-            "p":"22.000",
+            "p":"24.000",
             "d":"La saga completa por ese valor.",
          },
         {
             "t":"Ahsoka",
-            "p":"4.000",
+            "p":"7.000",
             "d":"Para fanáticos de Star Wars.",
             "i":"0 -47px",
         },
         {
             "t":"Saga Eragon",
-            "p":"22.000",
+            "p":"30.000",
             "d":"Los 5 por ese precio. El rojo es tapa dura (rl segundo de la saga), pero se perdio el covertor con la ilustarción.",
             "i":"0 -47px",
         },
         {
             "t":"Los pilares de la tierra",
-            "p":"7.000",
+            "p":"8.000",
             "d":"Escrito por Ken Follet.",
             "i":"0 -73px",
         },
         {
             "t":"Un mundo sin fin",
-            "p":"7.000",
+            "p":"8.000",
             "d":"Escrito por Ken Follet.",
         },
         {
             "t":"Harry Potter - 2",
-            "p":"5.000",
+            "p":"8.000",
             "d":"Es de tapa dura.",
             "i":"0 -60px",
         },
         {
             "t":"Harry Potter - 3",
-            "p":"5.000",
+            "p":"8.000",
             "d":"Es de tapa dura.",
         },
         {
             "t":"Harry Potter - 4",
-            "p":"5.000",
+            "p":"8.000",
             "d":"Es de tapa dura.",
             "i":"0 -50px",
         },
         {
             "t":"Harry Potter - 5",
-            "p":"5.000",
+            "p":"12.000",
             "d":"Es de tapa dura.",
         },
         {
             "t":"Harry Potter - 6",
-            "p":"5.000",
+            "p":"12.000",
             "d":"Es de tapa dura.",
             "i":"0 -50px",
         },
         {
             "t":"Juego de tronos I",
-            "p":"6.000",
+            "p":"10.000",
             "d":"Es de tapa dura.",
         },
         {
             "t":"La sociedad de la nieve",
-            "p":"4.000",
+            "p":"6.000",
             "d":"El libro sobre la caída del avión uruguayo en los Andes.",
             "i":"0 -73px",
         },        
         {
             "t":"Libros Rorschach",
-            "p":"7.000",
+            "p":"10.000",
             "d":"Los 3 juntos por ese precio. Son de la escuela argentina.",
         },
         {
@@ -134,7 +134,7 @@
         },
         {
             "t":"¿Tener o ser?",
-            "p":"2.000",
+            "p":"4.000",
             "d":"Escrito por Erich Fromm.",
         },
         {
@@ -199,30 +199,30 @@
         },
         {
             "t":"El sufrimiento de los seres comunes",
-            "p":"3.000"
+            "p":"4.000"
         },
         {
             "t":"El mar de los trolls",
-            "p":"3.000"
+            "p":"4.000"
         },
         {
             "t":"Jumper",
-            "p":"4.000",
+            "p":"5.000",
             "d":"Nada que ver a la película y mucho mejor."
         },
         {
             "t":"La sombra",
-            "p":"4.000",
+            "p":"6.000",
             "d":"Escrito por Juancito Katzenbach."
         },
         {
             "t":"El estudiante",
-            "p":"4.000",
+            "p":"6.000",
             "d":"Escrito por Juancito Katzenbach."
         },
         {
             "t":"El informe de Brodeck",
-            "p":"4.000",
+            "p":"8.000",
             "d":"Escrito por Philippe Claudel"
         },
         {
@@ -236,7 +236,7 @@
         },
         {
             "t":"Cartas a Theo",
-            "p":"4.000",
+            "p":"5.000",
             "d":"Son cartas de Van Gogh a su hermano a quien amaba. Ves el descenso a la locura, y como no era tampoco muy cuerdo en sus inicios."
         },
         {
@@ -245,7 +245,7 @@
         },
         {
             "t":"El retorno del principe",
-            "p":"3.000",
+            "p":"4.000",
             "d":"El escritor imagina que se topa con el pricipito y este la pasa su sabiduría."
         }
     ];
@@ -254,6 +254,8 @@
     const btnSel = document.querySelector("[data-sendall]");
     const wapp = "https://wa.me/+541152201682/?text=Hola Javier! Te consulto por que vendés:"
     const trunc = 26;
+
+    let total = 0
 
     products.forEach( (p, i) => {
         const el = document.createElement("div");
@@ -278,7 +280,9 @@
             </div>
         `;
         container.appendChild(el);
+        total += Number(p.p.replace(".", ""))
     });
+    console.log(total)
 
     document.querySelectorAll("[data-descclick]").forEach(el =>{
         el.onclick = ()=>{
