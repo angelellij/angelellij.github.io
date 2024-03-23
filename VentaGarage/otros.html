@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title> Venta por mudanza </title>
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Kalam&display=swap" rel="stylesheet">
+        <meta name="viewport", content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+        <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+        <link rel="stylesheet" href="vg.css">
+    </head>
+    <body style="margin:0;">
+        <main>
+            <nav>
+                <div> <p> Venta por <br> mudanza </p> </div>
+                <div>
+                    <a href="index.html">Libros</a></span>
+                    <a href="otros.html">De todo</a>
+                </div>
+            </nav>
+            <div class='container'><div id="product-container"></div></div>
+            <div class="footer">
+                <a data-sendall="[]" class="btn" target="_blank">Consultar seleccionados</a>
+                <a class="btn" href="https://maps.app.goo.gl/QsNaHJsxXg4SzNqp9" target="_blank">Ubicación</a>
+            </div>
+        </main>
+    </body>
+
+    <script>
+    const products = [
+        {
+            "t":"Cortadora de pasto",
+            "d":"En este momento arranca y se para al rato. Parece ser una boludez lo que tiene. Reemplazamos el carburador hace un par de meses.",
+            "p":"100.000",
+            "v":"1"
+        },{
+            "t":"Mueble tele",
+            "p":"40.000",
+            "d":"Tiene para dos estantes adentro (Un vidrio)",
+            "i":"0 -120px"
+        }
+    ];
+
+    const container = document.getElementById("product-container");
+    const btnSel = document.querySelector("[data-sendall]");
+    const wapp = "https://wa.me/+541152201682/?text=Hola Javier! Te consulto por que vendés:"
+    const trunc = 26;
+
+    products.forEach( (p, i) => {
+        const el = document.createElement("div");
+        el.dataset.ven = Boolean(p.v);
+        el.dataset.desc = Boolean(p.d);
+        el.dataset.show = "img";
+        el.dataset.el = i;
+        el.innerHTML =  `
+            <div class="img-wrapper">
+                <img src="imagenes/${p.t.replace(/[?¿:]/g, "")}.jpeg" ${p.i ? "style='object-position:"+p.i+"'" : ""}>
+                <div>
+                    <h3> Descripción </h3>
+                    <p>${p.d}</p>
+                </div>
+            </div>
+            <input type="checkbox" data-selected="${p.t}">
+            <div>
+                <p> ${p.t.length > trunc ? p.t.slice(0, trunc-3) + "..." : p.t} </p>
+                <h2> $${p.p}</h2>
+                <p data-descclick="${i}"><small>Ver descripción</small><small>Ver imagen</small></p>
+                <a class="btn" href="${wapp} ${p.t}." target="_blank"> Whatsapp </a>
+            </div>
+        `;
+        container.appendChild(el);
+    });
+
+    document.querySelectorAll("[data-descclick]").forEach(el =>{
+        el.onclick = ()=>{
+            let cont = document.querySelector(`[data-el="${el.dataset.descclick}"]`)
+            if ( cont.dataset.show == "desc") cont.dataset.show="img";
+            else cont.dataset.show = "desc";
+        }
+    });
+
+    document.querySelectorAll("[data-el]").forEach(el =>{
+        el.onclick = (e)=>{
+            let tg = document.querySelector(`[data-descclick="${el.dataset.el}"]`);
+            if( [tg, tg.firstChild, tg.lastChild].includes(e.target) ) return;
+            document.querySelector(`[data-el="${el.dataset.el}"]`).dataset.show="img";
+        }
+    })
+
+    document.querySelectorAll("[data-selected]").forEach(el =>{
+        el.onclick = (e)=>{
+            let res = JSON.parse(btnSel.dataset.sendall);
+
+            if(el.checked) res.push(el.dataset.selected);
+            else res.splice(el.dataset.selected, 1);
+
+            btnSel.dataset.sendall = JSON.stringify(res);
+            btnSel.href = `${wapp} ${res}.`;
+        }
+    })
+    </script>
+
+
+    
+</html>
