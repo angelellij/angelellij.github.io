@@ -38,6 +38,11 @@
                     <span class="en">Upload your SQUARE frame (png, webp or svg).</span>
                     <span class="en">Subir un marco CUADRADO (png, webp or svg).</span>
                 </p>
+                <div>
+                    <h3> Change Font </h3>
+                    <input id="font-name" type="text" placeholder="font name"> 
+                    <input id="font-size" type="number" placeholder="font size in px"> 
+                </div>
                 <div class="row">
                     <div  class="col s3"><img id='frame' src="Frame.png" style="width:100%;" accept=".png,.webp,.svg"> </div>
                     <div class="col s9"><input id="frame-input" type="file"></div>
@@ -95,11 +100,35 @@
         const frameInput = document.getElementById("frame-input");
         const ipts = document.getElementsByClassName("word-inputs");
 
+        var fname = document.getElementById("font-name")
+        var fsize = document.getElementById("font-size")
+
+        var font_name = "Caveat Brush";
+        var font_size = "96px";
+
+        fname.addEventListener("change", function(ev){
+            if (fname.value == ""){
+                font_name = "Caveat Brush";
+                return;
+            }
+            font_name = fname.value;
+            var parsed_name = fname.value.replace(" ", "+")
+            document.querySelector("head").innerHTML += `<link href="https://fonts.googleapis.com/css2?family=${parsed_name}" rel="stylesheet">`;
+        })
+
+        fsize.addEventListener("change", function(ev){
+            if (fsize.value == 0){
+                font_size = "96px";
+                return;
+            }
+            font_size = `${fsize.value}px`;
+        })
+
         //Build the page
         ctx.globalCompositeOperation = 'source-over'
         ctx.fillStyle = "white";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.font = "96px Caveat Brush";
+        ctx.font = `${font_size} ${font_name}` ;
         ctx.textAlign = "left";
 
         for(let i = 0; i < ipts.length; i++){
