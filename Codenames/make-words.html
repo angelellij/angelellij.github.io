@@ -113,6 +113,8 @@
             }
             font_name = fname.value;
             ctx.font = `${font_size} ${font_name}` ;
+            console.log(ctx)
+            document.querySelector("body").style.fontFamily = font_name;
             var parsed_name = fname.value.replace(" ", "+")
             document.querySelector("head").innerHTML += `<link href="https://fonts.googleapis.com/css2?family=${parsed_name}" rel="stylesheet">`;
         })
